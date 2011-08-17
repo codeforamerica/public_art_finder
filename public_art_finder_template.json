@@ -1,0 +1,13 @@
+{
+  "_id" : "public_art_finder_template",
+  "title" : "[string] - title of the piece of art",
+  "artist" : "[string] - name of the artist(s), we'll need a way of normalizing this",
+  "description" : "[string] - description of work, artist statement, notes, etc.",
+  "discipline" : "[string] - preferably one of the following: sculpture, painting, photography, ceramics, fiber, architectural integration, mural, fountain, other",
+  "location_description" : "[string] - human readable location ",
+  "full_address" : "[string] - full street address, w/ city, state, zip if possible",
+  "geometry" : "[object] - latitude/longitude in geojson point format",
+  "images_url" : "[string] - This will be a comma delimited list of urls to remote images.  The other option for images is to make them attachments to the document.  I think we should accept both.",
+  "data_source" : "[string] - the source of the data. (i.e. 'San Francisco Arts Commission')",
+  "doc_type" : "[string] - this field is used by the app and should always be set to 'artwork'"
+}
