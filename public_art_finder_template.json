@@ -7,7 +7,7 @@
   "location_description" : "[string] - human readable location ",
   "full_address" : "[string] - full street address, w/ city, state, zip if possible",
   "geometry" : "[object] - latitude/longitude in geojson point format",
-  "images_url" : "[string] - This will be a comma delimited list of urls to remote images.  The other option for images is to make them attachments to the document.  I think we should accept both.",
+  "image_urls" : "[string] - This will be a comma delimited list of urls to remote images.  The other option for images is to make them attachments to the document.  I think we should accept both.",
   "data_source" : "[string] - the source of the data. (i.e. 'San Francisco Arts Commission')",
   "doc_type" : "[string] - this field is used by the app and should always be set to 'artwork'"
 }
