@@ -115,7 +115,8 @@ var Mural = {};
         });
     };
     
-    var calcDistance = function(mural) {
+    var calcDistance = function(mural, skip_echo) {
+      var skip_echo = skip_echo || false;
       var request = {
         origin:_myLocationLatLng, 
         destination: new google.maps.LatLng(mural.geometry.coordinates[1], mural.geometry.coordinates[0]),
@@ -124,10 +125,21 @@ var Mural = {};
       
       _directionsService.route(request, function(result, status) {        
         if (status == google.maps.DirectionsStatus.OK) {
-          $('.mural-dist-'+mural.properties._id).text('You are ' + result.routes[0].legs[0].distance.text + ' away.');
+          if(!skip_echo) $('.mural-dist-'+mural.properties._id).text('You are ' + result.routes[0].legs[0].distance.text + ' away.');
+          mural.distance = parseFloat(result.routes[0].legs[0].distance.text, 10);
         }
       });
     };
+    
+    // http://www.movable-type.co.uk/scripts/latlong.html
+    var quickDist = function(lat1, lon1, lat2, lon2) {
+      var R = 6371; // km
+      var d = Math.acos(Math.sin(lat1)*Math.sin(lat2) + 
+                        Math.cos(lat1)*Math.cos(lat2) *
+                        Math.cos(lon2-lon1)) * R;
+      return d;
+    };
+    
     
     var _refreshDetailList = function() {
       var $list = $(_options.listTarget).empty(),
@@ -210,18 +222,18 @@ var Mural = {};
                 var imgArray, i;
                 _murals = data.features;
                 
-                // Normalize our images
+                // Normalize our images & add distances
                 $.each(_murals, function(idx, mural) {
                     setImages(mural.properties);
+                    mural.distance = quickDist(_myLocationLatLng.lat(), _myLocationLatLng.lng(), mural.geometry.coordinates[1], mural.geometry.coordinates[0]);
                 });
 
                 // Sort the murals from closest to farthest
-                // TODO: make this work... (there is no distance property on 'properties')
-                function compareDist(a, b) { return  a.properties.distance - b.properties.distance; }
-                _murals.sort(compareDist);
+                function compareDist(a, b) { return  a.distance - b.distance; }
+                _murals.sort(function(a, b) { return  a.distance - b.distance; });
                 
-                // Only keep the closest 20
-                _murals = _murals.slice(0,40);
+                // Only keep the closest 50
+                _murals = _murals.slice(0,50);
                 
                 // Update the map markers and the listing page
                 _refreshMarkers();
