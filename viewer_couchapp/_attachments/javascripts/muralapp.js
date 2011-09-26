@@ -194,6 +194,7 @@ var Mural = {};
             }, 
             function(msg){
               alert('We couldn\'t locate your position.');
+              console.log(msg);
             },
             { enableHighAccuracy: true, maximumAge: 90000 });
         } 
