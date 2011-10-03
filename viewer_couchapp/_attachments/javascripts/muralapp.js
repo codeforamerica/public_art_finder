@@ -226,7 +226,11 @@ var Mural = {};
                 // Normalize our images & add distances
                 $.each(_murals, function(idx, mural) {
                     setImages(mural.properties);
-                    mural.distance = quickDist(_myLocationLatLng.lat(), _myLocationLatLng.lng(), mural.geometry.coordinates[1], mural.geometry.coordinates[0]);
+                    if(_myLocationLatLng) {
+                      mural.distance = quickDist(_myLocationLatLng.lat(), _myLocationLatLng.lng(), mural.geometry.coordinates[1], mural.geometry.coordinates[0]);
+                    } else {
+                      mural.distance = 0;
+                    }
                 });
 
                 // Sort the murals from closest to farthest
