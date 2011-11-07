@@ -15,6 +15,14 @@ ddoc =
 
 ddoc.views = {};
 
+ddoc.views.byCollection = {
+  map: function(doc) {
+      if (doc.collection) {
+          emit(doc.collection, doc);
+      }
+  }
+};
+
 ddoc.validate_doc_update = function (newDoc, oldDoc, userCtx) {   
   if (newDoc._deleted === true && userCtx.roles.indexOf('_admin') === -1) {     
     throw "Only admin can delete documents on this database.";
