@@ -60,3 +60,36 @@
 }
 
 .thumbnail { width: 100px; }
+
+/** Override jquery css stuff   **/
+.ui-bar-a {
+  background-image: url('../mosaic_header.png');
+}
+
+.ui-header .ui-title {
+  background: #000000;
+  margin: 0.5em 20px 0.8em;
+  padding: 3px;
+}
+
+.ui-header .ui-btn-left, 
+.ui-header .ui-btn-right {
+  top: 0.6em;
+}
+
+.ui-btn-corner-all {
+  background: #FFFFFF;
+  border-radius: 0;
+  border: none;
+}
+
+.ui-bar-a .ui-shadow {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.ui-btn-up-a, .ui-btn-hover-a {
+  text-shadow: none;
+  color: #000000;
+}
