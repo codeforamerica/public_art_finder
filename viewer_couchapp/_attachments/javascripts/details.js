@@ -25,7 +25,7 @@
                 detailsHtml += '<div class="details_title">'+mural.title+'</div>';
 
                 if(mural.imgs.length > 0) {
-                    detailsHtml += (mural.imgs[0] != "noimage.png") ? '<img src="'+mural.imgs[0]+'" />' : '';
+                    detailsHtml += (mural.imgs[0] != "images/noimage.png") ? '<img src="'+mural.imgs[0]+'" />' : '';
                     if(mural.imgs.length > 1) {
                         for(var i=1; i < mural.imgs.length; i++) {
                             imageHtml += '<img src="'+mural.imgs[i]+'" />';

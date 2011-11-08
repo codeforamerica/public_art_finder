@@ -7,8 +7,8 @@ var Mural = {};
       listTarget: '#list-container',
       detailTarget: '#detail-container',
       detailHeader: '#detail-header',
-      muralIcon: 'mural-icon-pin-32.png',
-      locationIcon: 'location-icon-pin-32.png'
+      muralIcon: 'images/mural-icon-pin-32.png',
+      locationIcon: 'images/location-icon-pin-32.png'
     }, options),
     //Map Styles
     _mapTypeName = 'Map',
@@ -298,7 +298,7 @@ var setImages = function (mural) {
             mural.imgs.push(Muralapp.db.path+'/'+mural._id+'/'+imgArray[i]);
         }
     } else {                                        // No image :(
-        mural.imgs.push('noimage.png');
+        mural.imgs.push('images/noimage.png');
     }
     return mural;
 }

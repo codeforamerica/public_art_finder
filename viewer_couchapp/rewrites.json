@@ -4,12 +4,12 @@
     "from": "favicon.ico"
   },
   {
-    "to": "style/*",
-    "from": "style/*"
+    "to": "stylesheets/*",
+    "from": "stylesheets/*"
   },
   {
-    "to": "script/*",
-    "from": "script/*"
+    "to": "javascripts/*",
+    "from": "javascripts/*"
   },
   {
     "to": "images/*",
@@ -17,7 +17,11 @@
   },
   {
     "to": "index.html",
-    "from": ""
+    "from": "/"
+  },
+  {
+    "from":"details.html",
+    "to":"details.html"
   },
   {
     "to": "/_spatiallist/geojson/full",

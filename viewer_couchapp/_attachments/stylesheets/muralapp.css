@@ -50,9 +50,9 @@
     color: #000000;
     width: 100px;
     border-width:20px 10px 10px 10px;
-    -moz-border-image:url("../mural-dialogue-box.png") 20 10 10 10 repeat stretch;
-    -webkit-border-image:url("../mural-dialogue-box.png") 20 10 10 10 repeat stretch;
-    border-image:url("../mural-dialogue-box.png") 20 10 10 10 repeat stretch;
+    -moz-border-image:url("../images/mural-dialogue-box.png") 20 10 10 10 repeat stretch;
+    -webkit-border-image:url("../images/mural-dialogue-box.png") 20 10 10 10 repeat stretch;
+    border-image:url("../images/mural-dialogue-box.png") 20 10 10 10 repeat stretch;
 }
 .infoBubbs a {
     color: #efefef;
@@ -63,7 +63,7 @@
 
 /** Override jquery css stuff   **/
 .ui-bar-a {
-  background-image: url('../mosaic_header.png');
+  background-image: url('../images/mosaic_header.png');
 }
 
 .ui-header .ui-title {
