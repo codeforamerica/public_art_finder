@@ -7,7 +7,7 @@ var Mural = {};
       listTarget: '#list-container',
       detailTarget: '#detail-container',
       detailHeader: '#detail-header',
-      muralIcon: 'images/mural-icon-pin-32.png',
+      muralIcon: 'images/mosaic-marker.png',
       locationIcon: 'images/location-icon-pin-32.png'
     }, options),
     //Map Styles
@@ -15,8 +15,8 @@ var Mural = {};
     _mapTypeDef = [{featureType: "road",elementType: "all",stylers: [{ saturation: -99 },{ hue: "#0000ff" }]},{featureType: "all",elementType: "labels",stylers: [{ visibility: "simplified" }]},{featureType: "road",elementType: "geometry",stylers: [{ visibility: "simplified" }]},{featureType: "road.local",elementType: "labels",stylers: [{ visibility: "on" }]},{featureType: "all",elementType: "geometry",stylers: [{ saturation: -20 }]}],
     _mapOptions = {
       zoom: 16,
-
-      center: new google.maps.LatLng(39.95185, -75.16382),     // PHL 39.95185, -75.16382  SF 37.7749295, -122.4194155
+      // PHL 39.95185, -75.16382  SF 37.7749295, -122.4194155
+      center: new google.maps.LatLng(37.7749295, -122.4194155),
       mapTypeId: _mapTypeName,
       mapTypeControlOptions: {
          mapTypeIds: [_mapTypeName, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID]
@@ -81,7 +81,7 @@ var Mural = {};
                   '" class="win-details-link">More details...</a>' +  
             '</div>';
             
-            var newOffset = new google.maps.Size(-62,3,'px','px');
+            var newOffset = new google.maps.Size(-68,0,'px','px');
             var winOptions = {
                 content: bubbs,
                 enableEventPropagation: true,
