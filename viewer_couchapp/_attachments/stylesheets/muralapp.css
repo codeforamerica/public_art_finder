@@ -32,8 +32,15 @@
 
 .details_wrapper strong {
     display: block;
+    background-color: #afb9fe;
+    text-shadow: none;
+    padding: 3px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
 }
-
+.ui-body-c {
+  background-color: #FFFFFF;
+}
 .portrait .details_wrapper img {
     width: 310px;
 }
