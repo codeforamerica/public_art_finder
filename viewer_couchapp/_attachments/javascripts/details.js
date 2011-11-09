@@ -11,7 +11,7 @@
             $detailTarget = $(_options.detailTarget, $container).html('Loading...');
         
         $.ajax({
-            url: Muralapp.db.path+'/_design/viewer/_list/jsonp/assetid?key="'+id+'"',
+            url: '/assetid?key="'+id+'"',
             crossDomain: true,
             dataType: 'jsonp',
             success: function (mural, textStatus, jqXHR) {            

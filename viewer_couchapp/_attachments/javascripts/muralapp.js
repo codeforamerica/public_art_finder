@@ -215,7 +215,7 @@ var Mural = {};
 
         // "Where da art at?" she ajaxed the couch.
         $.ajax({
-            url: Muralapp.db.path+'/_design/geo/_spatial/_list/geojson/full?bbox='+
+            url: '/data?bbox='+
                 bbox.minx+','+bbox.miny+','+bbox.maxx+','+bbox.maxy,
             crossDomain: true,
             dataType: 'jsonp',
@@ -295,7 +295,7 @@ var setImages = function (mural) {
     } else if(mural._attachments) {      // Using attachments
         imgArray = getKeys(mural._attachments);
         for(i=0; i < imgArray.length; i+=1) {       
-            mural.imgs.push(Muralapp.db.path+'/'+mural._id+'/'+imgArray[i]);
+            mural.imgs.push('/dbimgs/'+mural._id+'/'+imgArray[i]);
         }
     } else {                                        // No image :(
         mural.imgs.push('images/noimage.png');

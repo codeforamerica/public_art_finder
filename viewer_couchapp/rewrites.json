@@ -16,6 +16,14 @@
     "from": "images/*"
   },
   {
+    "from": "dbimgs/*",
+    "to": "../../*"
+  },
+  {
+    "from": "/assetid",
+    "to": "_list/jsonp/assetid"
+  },
+  {
     "to": "index.html",
     "from": "/"
   },
@@ -24,8 +32,8 @@
     "to":"details.html"
   },
   {
-    "to": "/_spatiallist/geojson/full",
-    "from": "/data"
+    "from": "/data",
+    "to": "../../_design/geo/_spatial/_list/geojson/full"
   },
   {
     "to": "./",
