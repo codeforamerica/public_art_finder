@@ -1,7 +1,7 @@
-<!DOCTYPE html> 
-<html> 
-    <head> 
-        <title>The Public Art App</title> 
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Public Art App</title>
         <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
         <link rel="stylesheet" href="stylesheets/muralapp.css" />
 
@@ -13,8 +13,8 @@
         <script type="text/javascript" src="javascripts/settings.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
 
-    </head> 
-<body> 
+    </head>
+<body>
 
 <!-- Map -->
 <div data-role="page" id="map-page">
@@ -27,7 +27,7 @@
     <div data-role="content" id="map-container">
         <div id="map-target"></div>
     </div>
-</div>    
+</div>
 
 
 <!-- List -->
@@ -36,10 +36,21 @@
         <a href="#map-page" data-transition="flip">Map</a>
         <h1>PUBLIC ART FINDER</h1>
         <a href="javascript:void(0);" class="find-me">Find Me</a>
+    </div>
+
+    <div data-role="content" id="list-container"></div>
+</div>
+
+
+<!-- about page -->
+<div data-role="page" id="about-page">
+    <div data-role="header" data-position="inline" data-backbtn="false">
     </div>    
 
-    <div data-role="content" id="list-container"></div>    
-</div>    
+    <div data-role="content" id="map-container">
+        <div id="spash">splash page :(</div>
+    </div>
+</div>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
