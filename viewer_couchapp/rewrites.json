@@ -36,6 +36,10 @@
     "to": "../../_design/geo/_spatial/_list/geojson/full"
   },
   {
+    "from": "/config",
+    "to":"_list/jsonp/config"
+  },
+  {
     "to": "./",
     "from": "ddoc"
   },

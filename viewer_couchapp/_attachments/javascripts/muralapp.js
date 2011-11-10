@@ -116,7 +116,7 @@ var Mural = {};
     };
 
     var calcDistance = function(mural, skip_echo) {
-      var skip_echo = skip_echo || false;
+      skip_echo = skip_echo || false;
       var request = {
         origin:_myLocationLatLng,
         destination: new google.maps.LatLng(mural.geometry.coordinates[1], mural.geometry.coordinates[0]),
@@ -275,17 +275,28 @@ var Mural = {};
 })(Mural);
 
 //Go go go go go!!
-var app;
-// $('#about-page').live('pagecreate', function(ev) {
-//     setTimeout(function() { 
-//       $.mobile.changePage($("#map-page"), { transition: "fade", changeHash: true }); 
-//     }, 3000);
-// });
-
-$('#map-page').live('pagecreate',function(event){ 
-    app = app || Mural.App();
-    $('#about-page').show().delay(3000).fadeOut();
+var app, config;
+$('#map-page').live('pagecreate',function(event){
+    loadConfig(function(c) {
+      config = c;
+      console.log(config);
+      $('#city_name').text(config.city_name);
+      $('#brought_to_you_by').text(config.brought_to_you_by);
+      setupGA();
+      app = app || Mural.App();
+      $('#about-page').show().delay(3000).fadeOut();
+    });
 });
+
+var loadConfig = function(callback) {
+  $.ajax({
+      url: '/config',
+      dataType: 'jsonp',
+      success: function (data, textStatus, jqXHR) {
+        callback(data);
+      }
+  });
+};
 
 // Setup the images for a given piece of art
 var setImages = function (mural) {
@@ -301,7 +312,7 @@ var setImages = function (mural) {
         mural.imgs.push('images/noimage.png');
     }
     return mural;
-}
+};
 
 // Helper function that returns all the keys for a given object
 var getKeys = function(obj){
@@ -312,4 +323,4 @@ var getKeys = function(obj){
         }
     }
     return keys;
-}
+};
