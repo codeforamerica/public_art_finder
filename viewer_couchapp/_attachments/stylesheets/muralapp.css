@@ -68,6 +68,58 @@
 
 .thumbnail { width: 100px; }
 
+/** About page **/
+#about-page {
+  background-image: url('../images/mosaic_header.png');
+}
+
+#about-container {
+  padding-left: 0;
+  margin-top: 1em;
+}
+
+.about-title {
+  background-color: #000000;
+  color: #FFFFFF;
+  font-size: 1.8em;
+  font-weight: 600;
+  text-shadow: none;
+  text-transform: uppercase;
+  
+  padding: 8px;
+  margin-bottom: 0.2em;
+  margin-left: 0;
+  float: left;
+  clear: left;
+}
+
+.about-credit {
+  background-color: #FFFFFF;
+  color: #FF0000;
+  text-shadow: none;
+  font-style: italic;
+  width: 200px;
+  position: absolute;
+  bottom: 2.2em;
+  right: 0;
+  padding: 8px;
+  font-size: 1.0em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.about-design-credit {
+  text-transform: uppercase;
+  text-shadow: none;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: #606060;
+  position: absolute;
+  bottom: 0.5em;
+  right: 0;
+  
+}
+
 /** Override jquery css stuff   **/
 .ui-bar-a {
   background-image: url('../images/mosaic_header.png');
