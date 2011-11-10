@@ -40,7 +40,7 @@
                     // HACK - the following if could be done more gracefully
                     var hideFields = ['_id','_rev','_attachments','geometry','title','id','imgs','doc_type','image_urls','artist','description'];
                     if(n != '' && hideFields.indexOf(i) === -1) {
-                        detailsHtml += '<li><strong>'+i+'</strong>'+n+'</li>';
+                        detailsHtml += '<li><strong>'+i.replace('_',' ')+'</strong>'+n+'</li>';
                     }
                 });
                 detailsHtml += '<ul>';
