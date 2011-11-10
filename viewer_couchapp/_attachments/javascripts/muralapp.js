@@ -279,10 +279,9 @@ var app, config;
 $('#map-page').live('pagecreate',function(event){
     loadConfig(function(c) {
       config = c;
-      console.log(config);
+      setupGA();
       $('#city_name').text(config.city_name);
       $('#brought_to_you_by').text(config.brought_to_you_by);
-      setupGA();
       app = app || Mural.App();
       $('#about-page').show().delay(3000).fadeOut();
     });
