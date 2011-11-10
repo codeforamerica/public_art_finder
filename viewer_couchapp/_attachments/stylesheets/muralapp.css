@@ -71,6 +71,7 @@
 /** About page **/
 #about-page {
   background-image: url('../images/mosaic_header.png');
+  font-family: "Helvetica","Arial",sans-serif;
 }
 
 #about-container {

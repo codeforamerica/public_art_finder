@@ -276,8 +276,15 @@ var Mural = {};
 
 //Go go go go go!!
 var app;
+// $('#about-page').live('pagecreate', function(ev) {
+//     setTimeout(function() { 
+//       $.mobile.changePage($("#map-page"), { transition: "fade", changeHash: true }); 
+//     }, 3000);
+// });
+
 $('#map-page').live('pagecreate',function(event){ 
     app = app || Mural.App();
+    $('#about-page').show().delay(3000).fadeOut();
 });
 
 // Setup the images for a given piece of art
