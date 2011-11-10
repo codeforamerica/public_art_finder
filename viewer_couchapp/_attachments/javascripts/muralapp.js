@@ -276,19 +276,8 @@ var Mural = {};
 
 //Go go go go go!!
 var app;
-$('#map-page').live('pagecreate',function(event){
-    console.log('in map pageinit');
+$('#map-page').live('pagecreate',function(event){ 
     app = app || Mural.App();
-    //app.refresh();
-});
-
-$('#map-page').live('pageshow', function(ev) {
-//    app.refresh();
-})
-
-$('#list-page').live('pageshow',function(event){
-    app = app || Mural.App();
-    //app.refresh();
 });
 
 // Setup the images for a given piece of art
