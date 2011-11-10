@@ -54,7 +54,7 @@ var Mural = {};
             // Build the html for our GMaps infoWindow
             var bubbleHtml = '';
             bubbleHtml += '<strong>'+mural.properties.title+'</strong><br />';
-            bubbleHtml += '<img class="thumbnail" src="'+mural.properties.imgs[0]+'" />';            
+            bubbleHtml += '<img class="thumbnail" src="'+mural.properties.imgs[0]+'" />';
             bubbleHtml = '<div id="mid-'+mural.properties._id+'" class="infoBubbs">'+bubbleHtml+'</div><br style="clear:both" />';
 
             // Evidently we need to create the div the old fashioned way
@@ -73,14 +73,14 @@ var Mural = {};
                 // Manually change the page
                 $.mobile.changePage(url);
             });
-            
-            var winContent = '<div class="win-content">' + 
+
+            var winContent = '<div class="win-content">' +
               '<div class="win-title">'+mural.properties.title+'</div>' +
-              '<img src="'+mural.properties.imgs[0]+'" />' + 
+              '<img src="'+mural.properties.imgs[0]+'" />' +
               '<a href="javascript:void(0);" data-assetid="'+mural.properties._id+
-                  '" class="win-details-link">More details...</a>' +  
+                  '" class="win-details-link">More details...</a>' +
             '</div>';
-            
+
             var newOffset = new google.maps.Size(-68,0,'px','px');
             var winOptions = {
                 content: bubbs,
@@ -89,10 +89,10 @@ var Mural = {};
                 pixelOffset: newOffset,
                 closeBoxMargin: '18px 8px 2px 2px'
             };
-            
+
             _infoWindow.setOptions(winOptions);
             _infoWindow.open(_map, marker);
-            
+
             $('.win-details-link').bind('tap',function(ev) {
                 // Build our url
                 var url = 'details.html?id='+$(this).attr('data-assetid');
@@ -111,40 +111,40 @@ var Mural = {};
         $.each(_murals, function(i, mural){
             if(mural && mural.geometry) {
                 _addMarker(mural);
-            }            
+            }
         });
     };
-    
+
     var calcDistance = function(mural, skip_echo) {
       var skip_echo = skip_echo || false;
       var request = {
-        origin:_myLocationLatLng, 
+        origin:_myLocationLatLng,
         destination: new google.maps.LatLng(mural.geometry.coordinates[1], mural.geometry.coordinates[0]),
         travelMode: google.maps.DirectionsTravelMode.WALKING
       };
-      
-      _directionsService.route(request, function(result, status) {        
+
+      _directionsService.route(request, function(result, status) {
         if (status == google.maps.DirectionsStatus.OK) {
           if(!skip_echo) $('.mural-dist-'+mural.properties._id).text('You are ' + result.routes[0].legs[0].distance.text + ' away.');
           mural.distance = parseFloat(result.routes[0].legs[0].distance.text, 10);
         }
       });
     };
-    
+
     // http://www.movable-type.co.uk/scripts/latlong.html
     var quickDist = function(lat1, lon1, lat2, lon2) {
       var R = 6371; // km
-      var d = Math.acos(Math.sin(lat1)*Math.sin(lat2) + 
+      var d = Math.acos(Math.sin(lat1)*Math.sin(lat2) +
                         Math.cos(lat1)*Math.cos(lat2) *
                         Math.cos(lon2-lon1)) * R;
       return d;
     };
-    
-    
+
+
     var _refreshDetailList = function() {
       var $list = $(_options.listTarget).empty(),
-        html = '<ul data-role="listview" data-inset="true" data-theme="d">';
-      
+        html = '<ul id="artlisting" data-role="listview" data-inset="true" data-theme="d">';
+
       $.each(_murals, function(i, mural){
           html += '<li><img class="thumbnail" src="'+mural.properties.imgs[0]+'" alt="'+mural.properties.title + '" class="ul-li-icon">' +
               '<a href="details.html?id='+ mural.properties._id +'">' + mural.properties.title + '</a>';
@@ -155,32 +155,31 @@ var Mural = {};
           html += '</li>';
       });
       html += '</ul>';
-      $list.append(html);
-      
+      $list.html(html);
+
+
       if (_myLocationLatLng) {
         $.each(_murals, function(i, mural) {
           calcDistance(mural);
         });
-      }      
-      
+      }
       $list.find('ul').listview();
     };
-    
+
     // Where are we?
     _self.findMe = function() {
-      
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition( function(position) {
                 var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                
+
                 //Clear the marker if it exists
                 if(_myLocationMarker) {
                   _myLocationMarker.setMap(null);
                 }
-                
-                
+
                 _myLocationLatLng = latLng;
-                
+
                 //Add a marker on my current location
                 _myLocationMarker = new google.maps.Marker({
                     map: _map,
@@ -188,18 +187,18 @@ var Mural = {};
                     icon: _options.locationIcon
                 });
 
-                _map.setCenter(_myLocationLatLng); 
-                _self.refresh(_myLocationLatLng);                   
-           
-            }, 
+                _map.setCenter(_myLocationLatLng);
+                _self.refresh(_myLocationLatLng);
+
+            },
             function(msg){
               alert('We couldn\'t locate your position.');
               console.log(msg);
             },
             { enableHighAccuracy: true, maximumAge: 90000 });
-        } 
-    };    
-    
+        }
+    };
+
     _self.refresh = function(latLng) {
         var ajaxUrl;
         // Figure out the bounding box for the query
@@ -222,7 +221,7 @@ var Mural = {};
             success: function (data, textStatus, jqXHR) {
                 var imgArray, i;
                 _murals = data.features;
-                
+
                 // Normalize our images & add distances
                 $.each(_murals, function(idx, mural) {
                     setImages(mural.properties);
@@ -236,10 +235,10 @@ var Mural = {};
                 // Sort the murals from closest to farthest
                 function compareDist(a, b) { return  a.distance - b.distance; }
                 _murals.sort(function(a, b) { return  a.distance - b.distance; });
-                
+
                 // Only keep the closest 50
                 _murals = _murals.slice(0,50);
-                
+
                 // Update the map markers and the listing page
                 _refreshMarkers();
                 _refreshDetailList();
@@ -256,20 +255,20 @@ var Mural = {};
         _map.setMapTypeId(_mapTypeName);
 
         google.maps.event.addListener(_map, 'dragend', function() {
-            _self.refresh(_map.getCenter()); 
+            _self.refresh(_map.getCenter());
         });
     };
-    
+
     var _initFindMe = function() {
       $('.find-me').live('click', function(){
           _self.findMe();
-      });  
+      });
     };
-    
+
     //Init the app
     _initMap();
     _initFindMe();
-    _self.findMe();   
+    _self.findMe();
 
     return _self;
   };
@@ -278,13 +277,18 @@ var Mural = {};
 //Go go go go go!!
 var app;
 $('#map-page').live('pagecreate',function(event){
+    console.log('in map pageinit');
     app = app || Mural.App();
-    app.refresh();
+    //app.refresh();
 });
 
-$('#list-page').live('pagecreate',function(event){
+$('#map-page').live('pageshow', function(ev) {
+//    app.refresh();
+})
+
+$('#list-page').live('pageshow',function(event){
     app = app || Mural.App();
-    app.refresh();
+    //app.refresh();
 });
 
 // Setup the images for a given piece of art
@@ -294,7 +298,7 @@ var setImages = function (mural) {
         mural.imgs = mural.image_urls;
     } else if(mural._attachments) {      // Using attachments
         imgArray = getKeys(mural._attachments);
-        for(i=0; i < imgArray.length; i+=1) {       
+        for(i=0; i < imgArray.length; i+=1) {
             mural.imgs.push('/dbimgs/'+mural._id+'/'+imgArray[i]);
         }
     } else {                                        // No image :(
