@@ -12,6 +12,10 @@
     "from": "javascripts/*"
   },
   {
+    "from":"vendor/*",
+    "to": "vendor/*"
+  },
+  {
     "to": "images/*",
     "from": "images/*"
   },
@@ -30,6 +34,10 @@
   {
     "from":"details.html",
     "to":"details.html"
+  },
+  {
+    "from":"/appcache",
+    "to":"_show/cache/"
   },
   {
     "from": "/data",

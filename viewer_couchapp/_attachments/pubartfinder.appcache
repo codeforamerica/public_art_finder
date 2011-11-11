@@ -1,0 +1,19 @@
+CACHE MANIFEST
+index.html
+
+stylesheets/images/ajax-loader.png
+stylesheets/jquery.mobile-1.0a4.1.min.css
+#stylesheets/muralapp.css
+
+#javascripts/details.js
+images/mural-dialogue-box.png
+images/mural-icon-pin-32.png
+images/mosaic_header.png
+images/mosaic-marker.png
+images/location-icon-pin-32.png
+images/noimage.png
+
+javascripts/jquery.mobile-1.0a4.1.min.js
+javascripts/infobox_packed.js
+#/javascripts/muralapp.js
+javascripts/jquery-1.5.2.min.js
