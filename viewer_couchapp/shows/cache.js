@@ -3,6 +3,7 @@ function(head, req) {
   var i = 0;
   var the_files = [
     'stylesheets/images/ajax-loader.png',
+    'stylesheets/images/icons-18-white.png',
     'stylesheets/jquery.mobile-1.0a4.1.min.css',
     'images/mural-dialogue-box.png',
     'images/mural-icon-pin-32.png',

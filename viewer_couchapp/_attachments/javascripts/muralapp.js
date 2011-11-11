@@ -51,6 +51,7 @@ var Mural = {};
         _markers.push(marker);
 
         google.maps.event.addListener(marker, "click", function() {
+            var thumbnail = mural.thumb || mural.properties.imgs[0];
             // Build the html for our GMaps infoWindow
             var bubbleHtml = '';
             bubbleHtml += '<strong>'+mural.properties.title+'</strong><br />';
@@ -76,7 +77,7 @@ var Mural = {};
 
             var winContent = '<div class="win-content">' +
               '<div class="win-title">'+mural.properties.title+'</div>' +
-              '<img src="'+mural.properties.imgs[0]+'" />' +
+              '<img src="'+thumbnail+'" />' +
               '<a href="javascript:void(0);" data-assetid="'+mural.properties._id+
                   '" class="win-details-link">More details...</a>' +
             '</div>';
@@ -122,13 +123,16 @@ var Mural = {};
         destination: new google.maps.LatLng(mural.geometry.coordinates[1], mural.geometry.coordinates[0]),
         travelMode: google.maps.DirectionsTravelMode.WALKING
       };
-
-      _directionsService.route(request, function(result, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-          if(!skip_echo) $('.mural-dist-'+mural.properties._id).text('You are ' + result.routes[0].legs[0].distance.text + ' away.');
-          mural.distance = parseFloat(result.routes[0].legs[0].distance.text, 10);
-        }
-      });
+      
+      mural.distance = parseFloat(quickDist(_myLocationLatLng.lat(), _myLocationLatLng.lng(), mural.geometry.coordinates[1], mural.geometry.coordinates[0]), 10);
+//      if(!skip_echo) $('.mural-dist-'+mural.properties._id).text('You are ' + mural.distance + ' km away.');
+      
+      // _directionsService.route(request, function(result, status) {
+      //         if (status == google.maps.DirectionsStatus.OK) {
+      //           if(!skip_echo) $('.mural-dist-'+mural.properties._id).text('You are ' + result.routes[0].legs[0].distance.text + ' away.');
+      //           mural.distance = parseFloat(result.routes[0].legs[0].distance.text, 10);
+      //         }
+      //       });
     };
 
     // http://www.movable-type.co.uk/scripts/latlong.html
@@ -146,7 +150,8 @@ var Mural = {};
         html = '<ul id="artlisting" data-role="listview" data-inset="true" data-theme="d">';
 
       $.each(_murals, function(i, mural){
-          html += '<li><img class="thumbnail" src="'+mural.properties.imgs[0]+'" alt="'+mural.properties.title + '" class="ul-li-icon">' +
+          var thumbnail = mural.thumb || mural.properties.imgs[0];
+          html += '<li><img class="thumbnail" src="'+thumbnail+'" alt="'+mural.properties.title + '" class="ul-li-icon">' +
               '<a href="details.html?id='+ mural.properties._id +'">' + mural.properties.title + '</a>';
 
           if (_myLocationLatLng) {
@@ -300,8 +305,16 @@ var loadConfig = function(callback) {
 // Setup the images for a given piece of art
 var setImages = function (mural) {
     mural.imgs = [];
-    if(mural.image_urls) {               // Using image_urls
+    mural.thumb = null;
+    var thumbbits = [];
+    if(mural.image_urls && mural.image_urls.length) {               // Using image_urls
         mural.imgs = mural.image_urls;
+        // A little hack to make use of our s3-hosted thumbnails
+        if(mural.image_urls[0].indexOf('s3.amazonaws.com') > -1) {
+          thumbbits = mural.image_urls[0].split('/');
+          thumbbits[thumbbits.length-1] = 'thumb_'+thumbbits[thumbbits.length-1];
+          mural.thumb = thumbbits.join('/');
+        }
     } else if(mural._attachments) {      // Using attachments
         imgArray = getKeys(mural._attachments);
         for(i=0; i < imgArray.length; i+=1) {
