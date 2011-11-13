@@ -51,11 +51,11 @@ var Mural = {};
         _markers.push(marker);
 
         google.maps.event.addListener(marker, "click", function() {
-            var thumbnail = mural.thumb || mural.properties.imgs[0];
+            var thumbnail = mural.properties.thumb || mural.properties.imgs[0];
             // Build the html for our GMaps infoWindow
             var bubbleHtml = '';
             bubbleHtml += '<strong>'+mural.properties.title+'</strong><br />';
-            bubbleHtml += '<img class="thumbnail" src="'+mural.properties.imgs[0]+'" />';
+            bubbleHtml += '<img class="thumbnail" src="'+thumbnail+'" />';
             bubbleHtml = '<div id="mid-'+mural.properties._id+'" class="infoBubbs">'+bubbleHtml+'</div><br style="clear:both" />';
 
             // Evidently we need to create the div the old fashioned way
@@ -150,7 +150,7 @@ var Mural = {};
         html = '<ul id="artlisting" data-role="listview" data-inset="true" data-theme="d">';
 
       $.each(_murals, function(i, mural){
-          var thumbnail = mural.thumb || mural.properties.imgs[0];
+          var thumbnail = mural.properties.thumb || mural.properties.imgs[0];
           html += '<li><img class="thumbnail" src="'+thumbnail+'" alt="'+mural.properties.title + '" class="ul-li-icon">' +
               '<a href="details.html?id='+ mural.properties._id +'">' + mural.properties.title + '</a>';
 
@@ -310,10 +310,13 @@ var setImages = function (mural) {
     if(mural.image_urls && mural.image_urls.length) {               // Using image_urls
         mural.imgs = mural.image_urls;
         // A little hack to make use of our s3-hosted thumbnails
-        if(mural.image_urls[0].indexOf('s3.amazonaws.com') > -1) {
+        if(mural.image_urls[0].indexOf('publicartimages.s3') > -1) {
           thumbbits = mural.image_urls[0].split('/');
           thumbbits[thumbbits.length-1] = 'thumb_'+thumbbits[thumbbits.length-1];
           mural.thumb = thumbbits.join('/');
+          thumbbits = mural.thumb.split('.');
+          thumbbits[thumbbits.length-1] = thumbbits[thumbbits.length-1].toLowerCase();
+          mural.thumb = thumbbits.join('.');
         }
     } else if(mural._attachments) {      // Using attachments
         imgArray = getKeys(mural._attachments);
@@ -323,6 +326,7 @@ var setImages = function (mural) {
     } else {                                        // No image :(
         mural.imgs.push('images/noimage.png');
     }
+    //console.log(mural.thumb);
     return mural;
 };
 
