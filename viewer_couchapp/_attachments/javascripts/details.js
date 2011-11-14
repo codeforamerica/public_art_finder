@@ -37,9 +37,7 @@
                 detailsHtml += '<li>A piece by '+mural.artist+'</li>';
                 detailsHtml += '<li><strong>Description</strong> '+mural.description+'</li>';
                 $.each(mural, function(i, n) {
-                    console.log(config.hide_fields.split(','));
-                    // HACK - the following if could be done more gracefully
-                    var hideFields = config.hide_fields;// || ['_id','_rev','_attachments','geometry','title','id','imgs','doc_type','image_urls','artist','description','thumb'];
+                    var hideFields = config.hide_fields || ['_id','_rev','_attachments','geometry','title','id','imgs','doc_type','image_urls','artist','description','thumb'];
                     if(n != '' && hideFields.indexOf(i) === -1) {
                         detailsHtml += '<li><strong>'+i.replace('_',' ')+'</strong>'+n+'</li>';
                     }

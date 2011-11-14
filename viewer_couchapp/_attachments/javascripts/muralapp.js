@@ -2,6 +2,10 @@ var Mural = {};
 
 (function(m){
   m.App = function(options) {
+    console.log(config.default_lat);
+    var defaultCenter = {};
+    defaultCenter.lat = config.default_lat || 37.7749295;
+    defaultCenter.lng = config.default_lng || -122.4194155;
     var _options = $.extend({
       mapTarget: '#map-target',
       listTarget: '#list-container',
@@ -16,7 +20,7 @@ var Mural = {};
     _mapOptions = {
       zoom: 16,
       // PHL 39.95185, -75.16382  SF 37.7749295, -122.4194155
-      center: new google.maps.LatLng(37.7749295, -122.4194155),
+      center: new google.maps.LatLng(defaultCenter.lat, defaultCenter.lng),
       mapTypeId: _mapTypeName,
       mapTypeControlOptions: {
          mapTypeIds: [_mapTypeName, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.HYBRID]
