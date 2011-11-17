@@ -11,7 +11,7 @@
             $detailTarget = $(_options.detailTarget, $container).html('Loading...');
         
         $.ajax({
-            url: Muralapp.db.path+'/_design/viewer/_list/jsonp/assetid?key="'+id+'"',
+            url: '/assetid?key="'+id+'"',
             crossDomain: true,
             dataType: 'jsonp',
             success: function (mural, textStatus, jqXHR) {            
@@ -25,7 +25,7 @@
                 detailsHtml += '<div class="details_title">'+mural.title+'</div>';
 
                 if(mural.imgs.length > 0) {
-                    detailsHtml += (mural.imgs[0] != "noimage.png") ? '<img src="'+mural.imgs[0]+'" />' : '';
+                    detailsHtml += (mural.imgs[0] != "images/noimage.png") ? '<img src="'+mural.imgs[0]+'" />' : '';
                     if(mural.imgs.length > 1) {
                         for(var i=1; i < mural.imgs.length; i++) {
                             imageHtml += '<img src="'+mural.imgs[i]+'" />';
@@ -34,11 +34,12 @@
                 }
                 detailsHtml += '<ul>';
                 // Dump everything else onto the page
+                detailsHtml += '<li>A piece by '+mural.artist+'</li>';
+                detailsHtml += '<li><strong>Description</strong> '+mural.description+'</li>';
                 $.each(mural, function(i, n) {
-                    // HACK - the following if could be done more gracefully
-                    var hideFields = ['_id','_rev','_attachments','geometry','title','id','imgs','doc_type'];
-                    if(n != '' && hideFields.indexOf(i) == -1) {
-                        detailsHtml += '<li><strong>'+i+'</strong>'+n+'</li>';
+                    var hideFields = config.hide_fields || ['_id','_rev','_attachments','geometry','title','id','imgs','doc_type','image_urls','artist','description','thumb'];
+                    if(n != '' && hideFields.indexOf(i) === -1) {
+                        detailsHtml += '<li><strong>'+i.replace('_',' ')+'</strong>'+n+'</li>';
                     }
                 });
                 detailsHtml += '<ul>';

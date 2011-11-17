@@ -1,57 +1,71 @@
-<!DOCTYPE html> 
-<html> 
-    <head> 
-        <title>The Public Art App</title> 
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
+<!DOCTYPE html>
+<html manifest="/appcache">
+    <head>
+        <title>The Public Art App</title>
+        <link rel="stylesheet" href="stylesheets/jquery.mobile-1.0a4.1.min.css" />
         <link rel="stylesheet" href="stylesheets/muralapp.css" />
 
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+        <script type="text/javascript" src="javascripts/jquery-1.5.2.min.js"></script>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
         <script type="text/javascript" src="javascripts/infobox_packed.js" charset="utf-8"></script>
         <script type="text/javascript" src="javascripts/muralapp.js"></script>
         <script type="text/javascript" src="javascripts/details.js"></script>
-        <script type="text/javascript" src="javascripts/settings.js"></script>
-        <script type="text/javascript" src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
+        <script type="text/javascript" src="javascripts/jquery.mobile-1.0a4.1.min.js"></script>
 
-    </head> 
-<body> 
+    </head>
+<body>
 
 <!-- Map -->
 <div data-role="page" id="map-page">
     <div data-role="header" data-position="inline" data-backbtn="false">
         <a href="#list-page" data-transition="flip">List</a>
-        <h1>The Public Art App</h1>
+        <h1>PUBLIC ART FINDER</h1>
         <a href="javascript:void(0);" class="find-me">Find Me</a>
-    </div>    
+    </div>
 
     <div data-role="content" id="map-container">
         <div id="map-target"></div>
     </div>
-</div>    
-
+</div>
 
 <!-- List -->
 <div data-role="page" id="list-page">
     <div data-role="header" data-position="inline" data-backbtn="false">
         <a href="#map-page" data-transition="flip">Map</a>
-        <h1>The Public Art App</h1>
+        <h1>PUBLIC ART FINDER</h1>
         <a href="javascript:void(0);" class="find-me">Find Me</a>
-    </div>    
+    </div>
 
-    <div data-role="content" id="list-container"></div>    
-</div>    
+    <div data-role="content" id="list-container"></div>
+</div>
+
+<!-- about page -->
+<div data-role="page" id="about-page">
+    <div data-role="header" data-position="inline" data-backbtn="false"></div>
+
+    <div data-role="content" id="about-container">
+        <span id="city_name" class="about-title">San Francisco</span>
+        <span class="about-title">Public</span>
+        <span class="about-title">Art</span>
+        <span class="about-title">Finder</span>
+        <div class="about-credit">Brought to you by<br /><span id="brought_to_you_by">SF Arts Commission</span></div>
+        <div class="about-design-credit">Design by Dumb Eyes</div>
+    </div>
+</div>
+
 <script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', Muralapp.google_analytics]);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
+  // I wrapped the analytics code in a function so that it would only run after the config vars are loaded
+  function setupGA() {
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', config.google_analytics]);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  }
 </script>
 </body>
 </html>

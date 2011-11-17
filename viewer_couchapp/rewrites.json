@@ -4,24 +4,48 @@
     "from": "favicon.ico"
   },
   {
-    "to": "style/*",
-    "from": "style/*"
+    "to": "stylesheets/*",
+    "from": "stylesheets/*"
   },
   {
-    "to": "script/*",
-    "from": "script/*"
+    "to": "javascripts/*",
+    "from": "javascripts/*"
+  },
+  {
+    "from":"vendor/*",
+    "to": "vendor/*"
   },
   {
     "to": "images/*",
     "from": "images/*"
   },
   {
-    "to": "index.html",
-    "from": ""
+    "from": "dbimgs/*",
+    "to": "../../*"
   },
   {
-    "to": "/_spatiallist/geojson/full",
-    "from": "/data"
+    "from": "/assetid",
+    "to": "_list/jsonp/assetid"
+  },
+  {
+    "to": "index.html",
+    "from": "/"
+  },
+  {
+    "from":"details.html",
+    "to":"details.html"
+  },
+  {
+    "from":"/appcache",
+    "to":"_show/cache/"
+  },
+  {
+    "from": "/data",
+    "to": "../../_design/geo/_spatial/_list/geojson/full"
+  },
+  {
+    "from": "/config",
+    "to":"_list/jsonp/config"
   },
   {
     "to": "./",
