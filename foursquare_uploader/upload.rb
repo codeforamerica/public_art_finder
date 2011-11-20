@@ -20,6 +20,7 @@ enable :sessions
 oauth_key = ENV['FSQ_CLIENT_ID']
 oauth_secret = ENV['FSQ_CLIENT_SECRET']
 couchview = 'http://127.0.0.1:5984/public_art_sf/_design/process/_view/foursquare'
+couchresults = 'http://admin:admin@127.0.0.1:5984/public_art_sf_4sq/'
 
 get '/' do
   <<-HTML
@@ -37,14 +38,27 @@ get '/auth/:name/callback' do
 
   # get the list of pieces
   the_couch = Curl::Easy.http_get(couchview)
-
   resp = JSON.parse(the_couch.body_str)
+
+  # Cycle through
   rows = resp['rows']
   allart = rows.map {|art| art['value'] }
-  puts allart[0]
-  client.add_venue(allart[0])
-
-  # allart.each { |piece| puts piece }
-  # Hit the API with whatever we want
+  # puts allart[0]
+  # allart.slice(0)
+  # allart.slice(1)
+  
+  allart.each do |teh_artz|
+    begin
+      # Add the venue
+      response = client.add_venue(teh_artz)
+    
+      # Save the response to our couch
+      more_couch = Curl::Easy.http_put(couchresults+'/'+response['id'], JSON.generate(response));
+      puts JSON.parse(more_couch.body_str)
+    rescue
+      puts "This didn't work"
+      puts teh_artz
+    end
+  end
 
 end
