@@ -8,7 +8,7 @@ The app as it's name implies provides a way for a local community to find and id
 A running instance of the app can be seen at http://phl.publicartapp.mobi/
 
 It looks like this:
-![Philadelphia instance screenshot](https://skitch.com/tinio/eciwr/public-art-finder "Philadelphia Public Art Finder")
+![Philadelphia instance screenshot](https://img.skitch.com/20120815-ci654xnbdb6bfgbe6pgk7hynpm.jpg "Philadelphia Public Art Finder")
 TODO: This should be screenshot from the iPhone Simulator
 
 ## How to setup the 'viewer' mobile app
