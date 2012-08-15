@@ -1,5 +1,9 @@
 # Public Art Finder
 
+## Description
+So.. what is a 'Public Art Finder' anyway?
+TODO
+
 ## How to setup the 'viewer' mobile app
 
 1. **Get  a CouchDB instance**
